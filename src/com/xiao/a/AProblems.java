@@ -796,6 +796,40 @@ public class AProblems {
 	@Test
 	public void a30() {
 		
+		//ac? 虽然ac了，但是数的范围没有确定，只是尽量大的写2~999999，所以存在一定的不确定性
+		int sum = 0;
+		for(int i = 2; i<999999;i++) {
+			if(isSatisfy(i)) {
+				sum+=i;
+			}
+		}
+		System.out.println("sum : "+sum);
+	}
+	private boolean isSatisfy(int i) {
+		
+		int POWER = 5;
+		
+		char digit[] = (i+"").toCharArray();
+		int digitPower5[] = new int[digit.length];
+		
+		int sum = 0;
+		for (int j = 0; j < digit.length; j++) {
+			int temp = (int) Math.pow(digit[j]-'0', POWER);
+			sum+=temp;
+			digitPower5[j]=temp;
+		}
+		if(sum==i) {
+			StringBuilder str = new StringBuilder(i+" = ");
+			for (int j = 0; j < digitPower5.length; j++) {
+				str.append((digit[j]-'0')+"^"+POWER+" : "+digitPower5[j]);
+				if(j!=digitPower5.length-1) {
+					str.append(" + ");
+				}
+			}
+			System.out.println(str);
+			return true;
+		}
+		return false;
 	}
 	
 }
