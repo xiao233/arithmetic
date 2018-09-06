@@ -1,6 +1,7 @@
 package com.xiao.utils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class HelpUtils {
@@ -127,7 +128,7 @@ public class HelpUtils {
 	 * @param n
 	 * @return
 	 */
-	public static int judgeDigit(int n) {
+	public static int judgeDigit(long n) {
 		int size = 0;
 		while(true) {
 			n/=10;
@@ -220,5 +221,147 @@ public class HelpUtils {
 			param1 = temp;
 		}
 		return param1;
+	}
+	
+	/**
+	 * 求一个数的阶乘
+	 * 2018-09-04 16:53:50
+	 * @param n
+	 * @return
+	 */
+	public static long getDigital(int n) {
+		if(n==0) {
+			return 1;
+		}
+		int mul =1;
+		for (int i = 1; i <= n; i++) {
+			mul*=i;
+		}
+		return mul;
+	}
+
+	/**
+	 * 获取数字的每一位
+	 * 2018-09-04 17:08:50
+	 * @param i
+	 * @return
+	 */
+	public static List<Integer> getBits(long i) {
+		List<Integer> bits = new ArrayList<Integer>();
+		while(i!=0) {
+			int temp = (int) (i%10);
+			i/=10;
+			bits.add(temp);
+		}
+		return bits;
+	}
+	
+	/**
+	 * 根据元素集src获取不同排序的字串<br/>
+	 * 2018-09-04 17:58:54
+	 * @param src
+	 * @return
+	 */
+	public static List<String> getSameBitsDifferentDigital(String []src){
+		
+		List<String> result = new ArrayList<String>();
+		long max = getDigital(src.length);
+		for (long i = 0; i < max; i++) {
+			String src0[] = Arrays.copyOf(src, src.length);
+			String temp = getIndexData(src0, i,max);
+			result.add(temp);
+		}
+		return result;
+	}
+	
+	/**
+	 * 根据元素集获取的不同排序指定顺序的字符串,从0开始
+	 * 2018-09-04 18:00:56
+	 * @param src
+	 * @param index
+	 * @return
+	 */
+	public static String getIndexData(String []src,long index,long max) {
+		int dataLenth = src.length;
+		
+		//long src_index = index;
+		
+		String rs = "";
+		for(int i = dataLenth;i >= 1;i--) {
+			long e = max/i;
+			if(index==0) {
+				break;
+			}
+			int bit = (int) (index/e);
+			index%=e;
+			max/=i;
+			rs+=bit;
+		}
+		String result ="";
+		for (int i = 0; i < rs.length(); i++) {
+			int temp = rs.charAt(i)-'0';
+			int position = -1;
+			for (int j = 0; j < src.length; j++) {
+				if(!src[j].equals("#")) {
+					position++;
+				}
+				if(position==temp) {
+					result+=src[j];
+					src[j]="#";
+					break;
+				}
+			}
+		}
+		
+		for (int i = 0; i < src.length; i++) {
+			if(!src[i].equals("#")) {
+				result+=src[i];
+			}
+		}
+		//System.out.println("index: "+src_index+" ,result: "+result);
+		return result;
+	}
+
+	/**
+	 * 获取一个字符串的循环数<br/>
+	 * 如：123-->231-->312
+	 * 2018-09-05 10:53:00
+	 * @param string
+	 * @return
+	 */
+	public static List<String> getCircleDigital(String string) {
+		List<String> result = new ArrayList<String>();
+		result.add(string);
+		for (int i = 0; i < string.length()-1; i++) {
+			String firstChar = string.substring(0, 1);
+			string = string.substring(1,string.length())+firstChar;
+			result.add(string);
+		}
+		return result;
+	}
+	
+	/**
+	 * 十进制转二进制
+	 * 2018-09-06 09:19:19
+	 * @param src
+	 * @return
+	 */
+	public static String intToBinary(int src) {
+		StringBuilder result = new StringBuilder();
+		while(src!=0) {
+			result.insert(0, src%2);
+			src/=2;
+		}
+		return result.toString();
+	}
+	
+	/**
+	 * 判断一个字符串是否是回文的
+	 * 2018-09-06 09:27:35
+	 * @param src
+	 * @return
+	 */
+	public static boolean judgeDigitalPalindromic (String src) {
+		return src.equals(new StringBuilder(src).reverse().toString())?true:false;
 	}
 }

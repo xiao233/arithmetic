@@ -2,13 +2,9 @@ package com.xiao.a;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Scanner;
 import java.util.TreeMap;
@@ -787,12 +783,49 @@ public class AProblems {
 	
 	@Test
 	public void a29() {
+		
+		//not get correct answer,I understand the question but can't solve
 		int start = 2;
 		int end = 100;
-		int all = (end-start)*(end-start);
+		int all = (end-start+1)*(end-start+1);
+		List<int[]> list = new ArrayList<int[]>();
+		for (int a = start; a <= end; a++) {
+			for (int b = start; b <= end; b++) {
+				if(Math.pow(a, b)<=end) {
+					int temp[] = new int[4];
+					temp[0]=a;
+					temp[1]=b;
+					temp[2]=(int) Math.pow(a, b);
+					list.add(temp);
+					
+				}else {
+					break;
+				}
+			}
+		}
+		
+		for (int b = start; b <= end; b++) {
+			int max[] = findMax(b,list);
+			if(max[0]>0) {
+				int reduce = (end/max[1]-start+1);
+				System.out.println(b+" ,max:"+max[0]+"^"+max[1]+" ,reduce: "+reduce);
+				all-=reduce;
+			}
+		}
+		System.out.println("all: "+all);
 		
 	}
 	
+	private int[] findMax(int i, List<int[]> list) {
+		int max[] = new int[2];
+		for (int[] js : list) {
+			if(i==js[2]&&max[0]<js[0]) {
+				max[0]=js[0];
+				max[1]=js[1];
+			}
+		}
+		return max;
+	}
 	@Test
 	public void a30() {
 		
