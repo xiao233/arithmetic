@@ -209,20 +209,26 @@ public class AProblems {
 	
 	@Test
 	public void a12() {
-		//error answer
-		long n = 0;
-		int max = 480;
-		for(long i =27754975;;i++) {
-			n+=i;
-			List<Long> list = HelpUtils.findDiviors(n);
-			if(list.size()>max) {
-				max = list.size();
+		//ac 2018/11/28
+		
+		//效率贼低，得跑1个多小时，以后看看能不能优化
+		
+		long minStart = 1;
+		int max = 1;
+		while(true) {
+			long currSum = (1+minStart)*minStart/2;
+			List<Long> list = HelpUtils.findDiviors(currSum);
+			if(list.size()>max+1) {
+				max = list.size()-1;
+				System.out.println("因子个数："+(list.size()-1)+",数： "+currSum+" ,加数： "+minStart);
 			}
-			if(list.size()>=500) {
-				System.out.println(n+": "+list.size()+"---"+max+"==="+list);
+			if(list.size()-1>500) {
+				System.out.println("结果："+currSum);
 				break;
 			}
+			minStart++;
 		}
+		
 	}
 	
 	@Test
@@ -396,16 +402,23 @@ public class AProblems {
 	
 	@Test
 	public void a15() {
-		//can not 
-		int n = 20;
-		System.out.println((long)Math.pow(2, n)+2*(n-1));
 		
-		int m = 2;
-		for (int i = 2; i <= 20; i++) {
-			m=m+2*i;
-			System.out.println(i+": "+m);
+		//ac 但是靠查找解题思路
+		/**
+		 * 题解：组合问题。在每一个路径中，都会有20次横向和20次纵向移动。
+		 * 如果把横向移动记为1，纵向移动记为0，那么问题就变成一个40位数字中有20个1和20个0的组合数。
+		 * 所以答案就是C（20,40）。
+		 */
+		int n = 20;
+		long rs = 1;
+		int j = 1 ;
+		for (int i = 2*n; i >n; i--) {
+			rs*=i;
+			rs/=j;
+			j++;
 		}
-		System.out.println(m);
+		
+		System.out.println("结果： "+rs);
 	}
 	
 	@Test
