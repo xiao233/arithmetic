@@ -5,23 +5,17 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Scanner;
+import java.util.Set;
 import java.util.TreeMap;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import com.xiao.entries.HugeLong;
 import com.xiao.utils.HelpUtils;
 import com.xiao.utils.StringUtils;
 public class AProblems {
-	private Scanner scan = null;
-	
-	@Before
-	public void init() {
-		scan = new Scanner(System.in);
-	}
 	@Test
 	public void a1() {
 		
@@ -458,11 +452,159 @@ public class AProblems {
 	@Test
 	public void a18() {
 		
+		//ac 
+		/**
+		 * 算法思路，参照最短路劲问题，数据位置模拟结点，数据值模拟到下一个结点的距离
+		 */
+		int data[][] = {
+				{75},
+				{95,64},
+				{17,47,82},
+				{18,35,87,10},
+				{20,04,82,47,65},
+				{19,1,23,75,3,34},
+				{88,2,77,73,7,63,67},
+				{99,65,4,28,6,16,70,92},
+				{41,41,26,56,83,40,80,70,33},
+				{41,48,72,33,47,32,37,16,94,29},
+				{53,71,44,65,25,43,91,52,97,51,14},
+				{70,11,33,28,77,73,17,78,39,68,17,57},
+				{91,71,52,38,17,14,91,43,58,50,27,29,48},
+				{63,66,4,68,89,53,67,30,73,16,69,87,40,31},
+				{4,62,98,27,23,9,70,98,73,93,38,53,60,4,23}
+		};
+		
+		int dataTemp[][] = {
+				{75},
+				{95,64},
+				{17,47,82},
+				{18,35,87,10},
+				{20,04,82,47,65},
+				{19,1,23,75,3,34},
+				{88,2,77,73,7,63,67},
+				{99,65,4,28,6,16,70,92},
+				{41,41,26,56,83,40,80,70,33},
+				{41,48,72,33,47,32,37,16,94,29},
+				{53,71,44,65,25,43,91,52,97,51,14},
+				{70,11,33,28,77,73,17,78,39,68,17,57},
+				{91,71,52,38,17,14,91,43,58,50,27,29,48},
+				{63,66,4,68,89,53,67,30,73,16,69,87,40,31},
+				{4,62,98,27,23,9,70,98,73,93,38,53,60,4,23}
+		};
+		
+		for (int i = 1; i < data.length; i++) {
+			for (int j = 0; j < data[i].length; j++) {
+				if(j==0) {
+					data[i][j]=data[i][j]+data[i-1][j];
+				}else if(j==data[i].length-1) {
+					data[i][j]=data[i][j]+data[i-1][j-1];
+				}else {
+					int left = data[i][j]+data[i-1][j-1];
+					int right = data[i][j]+data[i-1][j];
+					if(left<right) {
+						left = right;
+					}
+					data[i][j] = left;
+				}
+			}
+		}
+		
+		int max = 0;
+		int iMax = data.length-1;
+		int jMax = 0;
+		for (int i = 0; i < data[data.length-1].length; i++) {
+			if(data[data.length-1][i]>max) {
+				max = data[data.length-1][i];
+				jMax = i;
+			}
+		}
+		System.out.println("\nmax: "+max);
+		
+		
+		int lastColMax = dataTemp[iMax][jMax];
+		List<String> route = new ArrayList<String>();//记录路线
+		for (int i = dataTemp.length-1; i >0 ; i--) {
+			for (int j = 0; j < dataTemp[i].length; j++) {
+				if(dataTemp[i][j]==lastColMax) {
+					route.add(i+"-"+j);
+					if(j==0) {
+						lastColMax = dataTemp[i-1][j];
+					}else if(j==dataTemp[i].length-1) {
+						lastColMax = dataTemp[i-1][j-1];
+					}else {
+						int left = dataTemp[i-1][j-1];
+						int right = dataTemp[i-1][j];
+						lastColMax = Math.max(left, right);
+					}
+					break;
+				}
+			}
+		}
+		
+		for (String string : route) {
+			System.out.print(string+" ---> ");
+		}
 	}
 	
 	@Test
 	public void a19() {
 		
+		
+		//ac
+		
+		/**
+		 * 1900年1月1日是星期一,
+		 * 求： 20世纪（1901年1月1日到2000年12月31日）一共有多少个星期日落在了当月的第一天？
+		 */
+		
+		
+		int startYear = 1901;
+		int endYear = 2000;
+		
+		int sunCountAtFirst = 0;
+		
+		int start =1 ;//一号开始的星期数
+		
+		boolean isLeap = HelpUtils.checkIsLeapYears(1900);
+		int yearCount = 365;
+		if(isLeap) {
+			System.out.println(1900+"年是闰年--------------------");
+			yearCount = 366;
+		}
+		
+		start = yearCount%7+start;
+		start%=7;
+		if(start==0) {
+			start = 7;
+		}
+		System.out.println(1901+" 年的第一天是星期 "+start);
+		if(start==7) {
+			sunCountAtFirst++;
+		}
+		
+		for (int i = startYear; i <= endYear; i++) {
+			int j = 1;
+			if(startYear==i) {
+				j = 2;
+			}
+			System.out.println();
+			for (; j <= 12; j++) {
+				int monthCount = 0;
+				if(j==1) {
+					monthCount = HelpUtils.getMonthDay(12,i-1);
+				}else {
+					monthCount = HelpUtils.getMonthDay(j-1,i);
+				}
+				start = monthCount%7+start;
+				start%=7;
+				if(start==0) {
+					sunCountAtFirst++;
+					start = 7;
+				}
+				System.out.println(i+"年的"+j+"月的第一天是星期"+start+"  ===  "+monthCount);
+			}
+		}
+		System.out.println("有： "+sunCountAtFirst);
 	}
 	@Test
 	public void a20() {
@@ -573,33 +715,18 @@ public class AProblems {
 		int max = 28223;
 		int sum = 1;
 		long start = System.currentTimeMillis();
-		for(int i = 2; i <= max;i++) {
-			boolean flag = false;
-			
-			if(!flag) {
-				sum+=i;
-			}
-			
-		}
+		
+		
 		long end = System.currentTimeMillis();
 		System.out.println("耗时: "+(end-start)*1.0/1000+"秒，sum: "+sum);
 	}
 	
-	/**
-	 * judge a digit is a abundant（充裕的） number
-	 * 2018-08-22 10:34:44
-	 * @param j
-	 * @return
-	 */
-	private boolean a23JudgeAbundant(int j) {
-		List<Long> divisors = HelpUtils.findDiviors(j);
-		long divisorSum = divisors.get(divisors.size()-1)-j;
-		return divisorSum>j?true:false;
-	}
+
 	@Test
 	public void a24() {
-		String data[]= {"0","1","2","3","4","5","6","7","8","9"};//源数组
 		//ac**
+		
+		String data[]= {"0","1","2","3","4","5","6","7","8","9"};//源数组
 		int n = data.length;//源数组个数
 		int mul = 1;
 		
@@ -721,6 +848,38 @@ public class AProblems {
 	@Test
 	public void a27() {
 		
+		//ac
+		
+		int max = 0;
+		int a_rs = -1000;
+		int b_rs = -1000;
+		for(int a = -999; a <= 999;a++) {
+			for (int b = -999; b <= 999; b++) {
+				if(!HelpUtils.checkPrime(Math.abs(b))) {
+					continue;
+				}
+				int rs = getMax(a,b);
+				if(rs>max) {
+					max = rs;
+					a_rs = a;
+					b_rs = b;
+				}
+			}
+			
+		}
+		System.out.println("a = "+a_rs+" ,b = "+b_rs+" , n = "+max+" ,rs = "+a_rs*b_rs);
+	}
+	
+	private int getMax(int a, int b) {
+		int n = -1;
+		while(true) {
+			long rs = n*n+a*n+b;
+			if(!HelpUtils.checkPrime(rs)) {
+				break;
+			}
+			n++;
+		}
+		return n;
 	}
 	
 	@Test
@@ -839,6 +998,8 @@ public class AProblems {
 		}
 		return max;
 	}
+	
+	
 	@Test
 	public void a30() {
 		

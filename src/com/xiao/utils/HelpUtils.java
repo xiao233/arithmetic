@@ -364,4 +364,45 @@ public class HelpUtils {
 	public static boolean judgeDigitalPalindromic (String src) {
 		return src.equals(new StringBuilder(src).reverse().toString())?true:false;
 	}
+
+	
+	/**
+	 * 判断年份是否为闰年
+	 * 2018-12-03 10:48:58
+	 * @param i
+	 * @return
+	 */
+	public static boolean checkIsLeapYears(int i) {
+		if(i%400==0) {
+			return true;
+		}
+		
+		if(i%4==0&&i%100!=0) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * 获取当前年份当前月的天数
+	 * 2018-12-03 11:39:50
+	 * @param month
+	 * @param year
+	 * @return
+	 */
+	public static int getMonthDay(int month, int year) {
+		if(month==1||month==3||month==5||month==7||month==8||month==10||month==12) {
+			return 31;
+		}
+		if(month==4||month==6||month==9||month==11) {
+			return 30;
+		}
+		if(month==2) {
+			if(checkIsLeapYears(year)) {
+				return 29;
+			}
+			return 28;
+		}
+		return 0;
+	}
 }
