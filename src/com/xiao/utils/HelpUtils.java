@@ -1,5 +1,7 @@
 package com.xiao.utils;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -404,5 +406,23 @@ public class HelpUtils {
 			return 28;
 		}
 		return 0;
+	}
+
+	/**
+	 * ªÒ»°URL
+	 * 2018-12-27 10:07:26
+	 * @param urlPath
+	 * @return
+	 */
+	public static URL getURL(String urlPath) {
+		URL url = null ;
+		
+		try {
+			url = new URL(urlPath);
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return url;
 	}
 }

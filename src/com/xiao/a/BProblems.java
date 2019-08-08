@@ -5,6 +5,12 @@ import org.junit.Test;
 
 import com.xiao.utils.HelpUtils;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -28,8 +34,8 @@ public class BProblems {
 	@Test
 	public void a31() {
 		int data[] = {1,2,5,10,20,50,100,200};
-		int min = 200/200;//×î¶à¸öÊı
-		int max =200/1;//×îÉÙ¸öÊı
+		int min = 200/200;//æœ€å¤šä¸ªæ•°
+		int max =200/1;//æœ€å°‘ä¸ªæ•°
 		
 		int count=0;
 		for (int i = min; i <= max; i++) {
@@ -44,12 +50,12 @@ public class BProblems {
 		
 		
 		/**
-		 * ·ÖÎö£º
-		 * ÈôÒª³ËÊı¡¢±»³ËÊı¡¢»ı¸÷¸öÎ»Êı¸ÕºÃ°üº¬1-9
-		 * 		Áî£º³ËÊıÎ»Êıx£¬±»³ËÊıÎ»Êıy,Ôò»ıÎ»Êız<=x+yÇÒz>=x+y-1(x¡¢y¡¢z²»µÈÓÚ0);
-		 * 		Ôò£º×ÜµÄÎ»Êı9=x+y+z>=x+y+x+y-1,µÃx+y<=5,z<=5;
-		 * 		ÓÖ£º9=x+y+z<=x+y+x+y,µÃx+y>=4.5;
-		 * 		ÒòÎªx¡¢y¡¢z¶¼ÊÇÕıÕûÊı£¬Ôòx+y=5,z=4;
+		 * åˆ†æï¼š
+		 * è‹¥è¦ä¹˜æ•°ã€è¢«ä¹˜æ•°ã€ç§¯å„ä¸ªä½æ•°åˆšå¥½åŒ…å«1-9
+		 * 		ä»¤ï¼šä¹˜æ•°ä½æ•°xï¼Œè¢«ä¹˜æ•°ä½æ•°y,åˆ™ç§¯ä½æ•°z<=x+yä¸”z>=x+y-1(xã€yã€zä¸ç­‰äº0);
+		 * 		åˆ™ï¼šæ€»çš„ä½æ•°9=x+y+z>=x+y+x+y-1,å¾—x+y<=5,z<=5;
+		 * 		åˆï¼š9=x+y+z<=x+y+x+y,å¾—x+y>=4.5;
+		 * 		å› ä¸ºxã€yã€zéƒ½æ˜¯æ­£æ•´æ•°ï¼Œåˆ™x+y=5,z=4;
 		 */
 		
 		int zStart = 1234;
@@ -78,7 +84,7 @@ public class BProblems {
 	}
 	
 	/**
-	 * Ğ£Ñé½á¹û
+	 * æ ¡éªŒç»“æœ
 	 * 2018-12-25 17:21:55
 	 * @param flagTemp
 	 * @return
@@ -93,7 +99,7 @@ public class BProblems {
 	}
 
 	/**
-	 * ³ËÊı¡¢±»³ËÊı¡¢»ıÕ¼Î»£¬²¢ÅĞ¶ÏÊÇ·ñ·ûºÏÌõ¼ş
+	 * ä¹˜æ•°ã€è¢«ä¹˜æ•°ã€ç§¯å ä½ï¼Œå¹¶åˆ¤æ–­æ˜¯å¦ç¬¦åˆæ¡ä»¶
 	 * 2018-12-25 16:42:05
 	 * @param flag
 	 * @param zStart
@@ -118,7 +124,7 @@ public class BProblems {
 	}
 
 	/**
-	 * ³õÊ¼»¯Êı×é
+	 * åˆå§‹åŒ–æ•°ç»„
 	 * 2018-12-25 16:41:47
 	 * @param flag
 	 */
@@ -135,9 +141,9 @@ public class BProblems {
 		//ac
 		
 		/**
-		 * ·ÖÎö£º·Ö×Ó·ÖÄ¸¶¼ÊÇÁ½Î»Êı£¬·Ö×Ó·ÖÄ¸²»ÄÜ±»10Õû³ı£»
-		 * 	   ÊÇÕæ·ÖÊı£¬ÇÒ·Ö×Ó·ÖÄ¸ÖÁÉÙÓĞÒ»¸öÊı×ÖÏàÍ¬£»
-		 * 	 ·Ö×Ó·ÖÄ¸È¥µôÏàÍ¬µÄÊıºó£¬Öµ±£³Ö²»±ä
+		 * åˆ†æï¼šåˆ†å­åˆ†æ¯éƒ½æ˜¯ä¸¤ä½æ•°ï¼Œåˆ†å­åˆ†æ¯ä¸èƒ½è¢«10æ•´é™¤ï¼›
+		 * 	   æ˜¯çœŸåˆ†æ•°ï¼Œä¸”åˆ†å­åˆ†æ¯è‡³å°‘æœ‰ä¸€ä¸ªæ•°å­—ç›¸åŒï¼›
+		 * 	 åˆ†å­åˆ†æ¯å»æ‰ç›¸åŒçš„æ•°åï¼Œå€¼ä¿æŒä¸å˜
 		 */
 		
 		int upStart = 11;
@@ -165,7 +171,7 @@ public class BProblems {
 	}
 	
 	/**
-	 * ÅĞ¶ÏÁ½¸öÊıÊÇ·ñ´æÂú×ãÌõ¼ş
+	 * åˆ¤æ–­ä¸¤ä¸ªæ•°æ˜¯å¦å­˜æ»¡è¶³æ¡ä»¶
 	 * 2018-12-25 17:38:22
 	 * @param upStart
 	 * @param downStart
@@ -239,7 +245,7 @@ public class BProblems {
 			}
 		}
 		long end = System.currentTimeMillis();
-		System.out.println("ºÄÊ±: "+(end-start)/MILLIONS+"ms");
+		System.out.println("è€—æ—¶: "+(end-start)/MILLIONS+"ms");
 	}
 	
 	@Test
@@ -284,7 +290,7 @@ public class BProblems {
 			}
 		}
 		long end = System.currentTimeMillis();
-		System.out.println("ºÄÊ±: "+(end-start)/MILLIONS+"ms£¬½á¹û: "+count);
+		System.out.println("è€—æ—¶: "+(end-start)/MILLIONS+"msï¼Œç»“æœ: "+count);
 	}
 	
 	@Test
@@ -293,8 +299,8 @@ public class BProblems {
 		
 		
 		/**
-		 * Ê®½øÖÆÊı585=1001001001B£¨¶ş½øÖÆ£©£¬¶ÔÓÚ»ùÊı10ºÍ2¶¼ÊÇ»ØÎÄÊı¡£
-		 * ÕÒ³öĞ¡ÓÚÒ»°ÙÍòµÄËùÓĞ»ØÎÄÊı£¨¶ÔÓÚ»ùÊı10ºÍ2¶¼ÊÇ»ØÎÄÊı£©Ö®ºÍ¡£
+		 * åè¿›åˆ¶æ•°585=1001001001Bï¼ˆäºŒè¿›åˆ¶ï¼‰ï¼Œå¯¹äºåŸºæ•°10å’Œ2éƒ½æ˜¯å›æ–‡æ•°ã€‚
+		 * æ‰¾å‡ºå°äºä¸€ç™¾ä¸‡çš„æ‰€æœ‰å›æ–‡æ•°ï¼ˆå¯¹äºåŸºæ•°10å’Œ2éƒ½æ˜¯å›æ–‡æ•°ï¼‰ä¹‹å’Œã€‚
 		 */
 		
 		long start = System.currentTimeMillis();
@@ -306,14 +312,14 @@ public class BProblems {
 			if(HelpUtils.judgeDigitalPalindromic(i+"")) {
 				String bTemp = HelpUtils.intToBinary(i);
 				if(HelpUtils.judgeDigitalPalindromic(bTemp)) {
-					//System.out.println(i +" = "+bTemp+"ÊÇ»ØÎÄÊı");
+					//System.out.println(i +" = "+bTemp+"æ˜¯å›æ–‡æ•°");
 					sum+=i;
 				}
 			}
 		}
 		
 		long end = System.currentTimeMillis();
-		System.out.println("ºÄÊ±: "+(end-start)/MILLIONS+"ms£¬½á¹û: "+sum); 
+		System.out.println("è€—æ—¶: "+(end-start)/MILLIONS+"msï¼Œç»“æœ: "+sum); 
 	}
 	
 	@Test
@@ -352,7 +358,7 @@ public class BProblems {
 			j++;
 		}
 		long end = System.currentTimeMillis();
-		System.out.println("ºÄÊ±: "+(end-start)/MILLIONS+"ms£¬½á¹û: "+sum); 
+		System.out.println("è€—æ—¶: "+(end-start)/MILLIONS+"msï¼Œç»“æœ: "+sum); 
 	}
 	
 	@Test
@@ -361,8 +367,8 @@ public class BProblems {
 		//ac
 		
 		/**
-		 * ·ÖÎö£ºÒªµÃµ½×î´óµÄ9Î»Êı£¬Ôò´Ó×î´ó9Î»987654321ÄæĞò²éÕÒ£¬ÕÒµ½µÚÒ»¸ö·ûºÏÒªÇóµÄÊı
-		 * 	Áî³ËÊıÎªx£¬Ôò½á¹û×î¿ªÍ·´æÔÚx£¬È»ºóÊÇ2x....9x
+		 * åˆ†æï¼šè¦å¾—åˆ°æœ€å¤§çš„9ä½æ•°ï¼Œåˆ™ä»æœ€å¤§9ä½987654321é€†åºæŸ¥æ‰¾ï¼Œæ‰¾åˆ°ç¬¬ä¸€ä¸ªç¬¦åˆè¦æ±‚çš„æ•°
+		 * 	ä»¤ä¹˜æ•°ä¸ºxï¼Œåˆ™ç»“æœæœ€å¼€å¤´å­˜åœ¨xï¼Œç„¶åæ˜¯2x....9x
 		 */
 		
 		int product = 987654321;
@@ -370,12 +376,12 @@ public class BProblems {
 		
 		String data = "";
 		loop:for(;product>=123456789;product--) {
-			if(!a38check(product)) {//Êı±ØĞë°üº¬1-9µÄ¾ÅÎ»Êı
+			if(!a38check(product)) {//æ•°å¿…é¡»åŒ…å«1-9çš„ä¹ä½æ•°
 				continue;
 			}
 			data=""+product;
 			
-			boolean isOk = true;//ÊÇ·ñ·ûºÏÌõ¼ş
+			boolean isOk = true;//æ˜¯å¦ç¬¦åˆæ¡ä»¶
 			
 			for (int i = 1; i < data.length()-1; i++) {
 				
@@ -401,14 +407,14 @@ public class BProblems {
 				}
 				if(isOk) {
 					System.out.println("x: "+x+", n: "+n+" ,product: "+product);
-					break loop;//²é×î´ó
-					//break;//²éËùÓĞ
+					break loop;//æŸ¥æœ€å¤§
+					//break;//æŸ¥æ‰€æœ‰
 				}
 			}
 		}
 	}
 	/**
-	 * ³õ²½¹ıÂË²»·ûºÏÒªÇóµÄÊı
+	 * åˆæ­¥è¿‡æ»¤ä¸ç¬¦åˆè¦æ±‚çš„æ•°
 	 * 2018-12-26 10:35:25
 	 * @param product
 	 * @return
@@ -435,10 +441,10 @@ public class BProblems {
 		//ac
 		
 		/**
-		 * ·ÖÎö£ºÖÜ³¤p,±ß³¤a(×î´ó£©¡¢b(Æä´Î)¡¢c(×îĞ¡)£¬ÒòÎª¸úË³ĞòÎŞ¹Ø£¬ËùÒÔ¼Ù¶¨´óĞ¡£¬Ôòa>p/3£»
-		 * 	Ôò£ºa+b+c=p,ÓÖb+c>a,Ôòa<p/2;
-		 * 	ÓÖÖ±½ÇÈı½ÇĞÎÓĞa^2=b^2+c^2,¹«Ê½»»Ëãp^2=2(bc+pa);
-		 * ÇóÄÜ¹¹³ÉÖ±½ÇÈı½ÇĞÎ×î¶à×éºÏµÄÊıp
+		 * åˆ†æï¼šå‘¨é•¿p,è¾¹é•¿a(æœ€å¤§ï¼‰ã€b(å…¶æ¬¡)ã€c(æœ€å°)ï¼Œå› ä¸ºè·Ÿé¡ºåºæ— å…³ï¼Œæ‰€ä»¥å‡å®šå¤§å°ï¼Œåˆ™a>p/3ï¼›
+		 * 	åˆ™ï¼ša+b+c=p,åˆb+c>a,åˆ™a<p/2;
+		 * 	åˆç›´è§’ä¸‰è§’å½¢æœ‰a^2=b^2+c^2,å…¬å¼æ¢ç®—p^2=2(bc+pa);
+		 * æ±‚èƒ½æ„æˆç›´è§’ä¸‰è§’å½¢æœ€å¤šç»„åˆçš„æ•°p
 		 */
 		
 		int pMax = 1000;
@@ -461,5 +467,311 @@ public class BProblems {
 			}
 		}
 		System.out.println("mx: " +mx+" ,countMax: "+countMax);
+	}
+	
+	@Test
+	public void a40() {
+		
+		//ac
+		
+		/**
+		 * åˆ†æï¼šç›´æ¥ç”¨ä¸€ä¸ªå­—ç¬¦ä¸²ä¿å­˜å†éå†èƒ½æ±‚å‡ºç»“æœï¼Œä½†å ç”¨ç©ºé—´æ¯”è¾ƒå¤§ï¼Œ
+		 * 	 æ‰€ä»¥ä¸é‡‡ç”¨è¿™ç§æ–¹å¼ã€‚åˆ†ææ•°æ®å¾—ï¼Œ1ä½æ•°ä½ç½®èŒƒå›´[1,9],åŒç†
+		 *  2ä½[10,189],3ä½[190,2889],4ä½[2890,38889],
+		 *  5ä½[38890,488889],6ä½[488890,5888889]
+		 */
+		
+		int d[] = {1,10,100,1000,10000,100000,1000000};
+		int mul =1;
+		
+		for (int i = 0; i < d.length; i++) {
+			mul*=a40check(d[i]);
+		}
+		System.out.println("result: "+mul);
+	}
+
+	/**
+	 * å¯¹æ¯ä¸ªä½ç½®è¿›è¡Œå¤„ç†
+	 * 2018-12-27 09:20:46
+	 * @param position
+	 * @return
+	 */
+	private int a40check(int position) {
+		int length = 0;//æ•°å­—çš„é•¿åº¦
+		int min = 0;//æ­¤é•¿åº¦æ•°å­—çš„èµ·å§‹ä½ç½®
+		int start = 0;//æ­¤é•¿åº¦æ•°å­—èµ·å§‹å€¼
+		
+		if(position<=9) {
+			length = 1;
+			min = 1;
+			start = 1;
+		}else if(position<=189) {
+			length = 2;
+			min = 10;
+			start = 10;
+		}else if(position<=2889) {
+			length = 3;
+			min = 190;
+			start = 100;
+		}else if(position<=38889) {
+			length = 4;
+			min = 2890;
+			start = 1000;
+		}else if(position<=488889) {
+			length = 5;
+			min = 38890;
+			start = 10000;
+		}else if(position<=5888889) {
+			length = 6;
+			min = 488890;
+			start = 100000;
+		}
+		return a40deal(position,length,min,start);
+	}
+
+	/**
+	 * æ‰¾åˆ°æ¯ä¸ªä½ç½®çš„å€¼åŠå¯¹åº”çš„é‚£ä¸ªæ•°å­—
+	 * 2018-12-27 09:21:16
+	 * @param position
+	 * @param length
+	 * @param min
+	 * @param start
+	 * @return
+	 */
+	private int a40deal(int position, int length, int min, int start) {
+		int a = (position-min)/length; //å•†,æ­¤ä½ç½®åœ¨æ­¤èŒƒå›´å¯¹åº”çš„æ•°çš„ä½ç½®
+		
+		int data = start+a; //æ­¤æ•°
+		
+		int b = (position-min)%length; //ä½™æ•°ï¼Œæ­¤ä½ç½®å¯¹åº”æ•°çš„ä½ç½®
+		
+		int rs = (""+data).charAt(b)-'0';
+		
+		System.out.println("ç¬¬"+position+" ä½ï¼Œå¯¹åº”æ•°å­—ï¼š "+data+",å€¼ï¼š "+rs);
+		
+		return rs;
+	}
+	
+	@Test
+	public void a41() {
+		
+		//ac
+		
+		/**
+		 * åˆ†æï¼šç”±é¢˜æ„ï¼Œnæœ€å¤§ä¸º9ï¼Œå› ä¸ºæ±‚æœ€å¤§nä½æ•°ï¼Œåˆ™ä»987654321é€†åºéå†å¯»æ‰¾
+		 */
+		
+		int n = 987654321;
+		
+		while(true) {
+			if(n%2==0||n%5==0) {
+				n--;
+				continue;
+			}
+			if(a41check(n)&&HelpUtils.checkPrime(n)) {
+				System.out.println("n: "+n);
+				break;	
+			}
+			n--;
+		}
+	}
+	
+	/**
+	 * åˆæ­¥è¿‡æ»¤æ•°æ®
+	 * 2018-12-27 09:38:14
+	 * @param n
+	 * @return
+	 */
+	private boolean a41check(int n) {
+		int len = (""+n).length();
+		int flag[] = new int[len];
+		char bit[]=(""+n).toCharArray();
+		for (int i = 0; i < bit.length; i++) {
+			if(bit[i]=='0') {
+				return false;
+			}
+			if(bit[i]-'0'>len) {
+				return false;
+			}
+			if(flag[bit[i]-'1']==1) {
+				return false;
+			}
+			flag[bit[i]-'1']=1;
+		}
+		
+		for (int i = 0; i < flag.length; i++) {
+			if(flag[i]==0) {
+				return false;
+			}
+		}
+		
+		return true;
+	}
+
+	@Test
+	public void a42() {
+		//ac
+		
+		/**
+		 * åˆ†æï¼šä¸‰è§’æ•°æ»¡è¶³æ˜¯1-nçš„å’Œ
+		 */
+		
+		String urlPath = "https://projecteuler.net/project/resources/p042_words.txt";
+		URL url = HelpUtils.getURL(urlPath);
+		if(url!=null) {
+			try {
+				InputStream is = url.openStream();
+				BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+				
+				String lines = "";
+				
+				int count=0;
+				while((lines=br.readLine())!=null) {
+					count+=a42getCount(lines);
+				}
+				System.out.println("count: "+count);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else {
+			System.out.println("è·å–æ–‡ä»¶å¤±è´¥ï¼");
+		}
+	}
+	
+	
+	/**
+	 * æ‰¾å‡º triangle word
+	 * 2018-12-27 10:33:03
+	 * @param lines
+	 * @return
+	 */
+	private int a42getCount(String lines) {
+		String words[] = lines.split(",");
+		
+		int count = 0;
+		for (int i = 0; i < words.length; i++) {
+			int value = a42getValue(words[i].substring(1, words[i].length()-1));
+			if(a42check(value)) {
+				count++;
+				//System.out.println(words[i]+"---"+value);
+			}
+		}
+		return count;
+	}
+
+	/**
+	 * æ ¡éªŒæ˜¯å¦æ˜¯ä¸‰è§’æ•°
+	 * 2018-12-27 10:38:38
+	 * @param value
+	 * @return
+	 */
+	private boolean a42check(int value) {
+		int sqr = (int) Math.sqrt(value*2);
+		if(sqr*(sqr+1)==2*value) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * è®¡ç®—å•è¯å€¼
+	 * 2018-12-27 10:35:11
+	 * @param string
+	 * @return
+	 */
+	private int a42getValue(String string) {
+		char ch[] = string.toCharArray();
+		int sum = 0;
+		for (int i = 0; i < ch.length; i++) {
+			sum+=ch[i]-'A'+1;
+		}
+		return sum;
+	}
+
+	
+	@Test
+	public void a43() {
+	}
+	
+	@Test
+	public void a44() {
+		
+	}
+	
+	
+	@Test
+	public void a45() {
+		
+	}
+	
+	@Test
+	public void a46() {
+		
+	}
+	
+	@Test
+	public void a47() {
+		
+	}
+	
+	@Test
+	public void a48() {
+		
+	}
+	
+	@Test
+	public void a49() {
+		
+	}
+	
+	@Test
+	public void a50() {
+		
+	}
+	
+	@Test
+	public void a51() {
+		
+	}
+	
+	@Test
+	public void a52() {
+		
+	}
+	
+	@Test
+	public void a53() {
+		
+	}
+	
+	@Test
+	public void a54() {
+		
+	}
+	
+	@Test
+	public void a55() {
+		
+	}
+	
+	@Test
+	public void a56() {
+		
+	}
+	
+	@Test
+	public void a57() {
+		
+	}
+	
+	@Test
+	public void a58() {
+		
+	}
+	
+	@Test
+	public void a59() {
+		
 	}
 }
